@@ -45,7 +45,7 @@ namespace GrPhotos
              */
 
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/css/styles").Include(
                       "~/Content/css/clear.css",
                       "~/Content/css/common.css",
                       "~/Content/css/font-awesome.min.css",

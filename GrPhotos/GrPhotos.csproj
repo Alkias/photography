@@ -219,6 +219,7 @@
     <Content Include="Views\Home\Portfolio.cshtml" />
     <Content Include="Views\Home\BlogPost.cshtml" />
     <Content Include="Views\Home\PortfolioDetails.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
