@@ -173,7 +173,12 @@
         <script type='text/javascript' src='js/main.js'></script>
         <script type='text/javascript' src='js/zoom.js'></script>
         <script>
+            var zs ;
+            var m ;
             $(function(){
+
+                
+
                 var hash = window.location.hash;
                 var imgIndex = hash.replace("#","").split("p")[1];
 
@@ -186,9 +191,9 @@
                     p ="#p" + (page-1);
                 }
                 if((page-1) == 0) p="#p01";
-                if(page==12)  p="#p11";
+                if(page==15)  p="#p14";
 
-                var n = page>=1 && page<9? "#p0" + (page+1) : page<12 ? "#p" + (page+1):"#p12";
+                var n = page>=1 && page<9? "#p0" + (page+1) : page<15 ? "#p" + (page+1):"#p15";
 
                 $("#my_image").attr("src","images/bw/img_" + imgIndex + ".jpg");
 
@@ -202,8 +207,24 @@
                     window.location.href ="single-portfolio.html" + n ;
                     location.reload();
                 });
+                zs = this.ZoomService;
+                var mimg = $("#my_image").on("click", function(ev) {
+
+                   
+                    zs._zoom(ev);
 
 
+                    this.$(body)
+                    .removeClass('zoom-overlay-open')
+                    .addClass('zoom-overlay-transitioning')
+
+
+                    console.log(ev);
+                });
+                //  zs = this.ZoomService;
+                // zs._zoom(this.ev);
+
+                $("#my_image").trigger( "click");
             })
         </script>
     </body>

@@ -113,7 +113,6 @@
     }
   }
 
-
   /**
    * The zoom object
    */
@@ -272,7 +271,10 @@
 
   // wait for dom ready (incase script included before body)
   $(function () {
-    new ZoomService().listen()
+    //new ZoomService().listen()
+    this.ZoomService = new ZoomService();
+    this.ZoomService.listen();
+    return this.zs;
   })
 
 }(jQuery)
