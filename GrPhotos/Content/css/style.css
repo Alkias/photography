@@ -20,12 +20,12 @@ version 2.0
     1. Global CSS
 ====================================== */
 
-body
-{
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px; 	
+body {
+    /*font-family: 'Roboto', sans-serif;*/
+    font-family: 'Roboto Mono', monospace;
+    font-size: 15px;
     line-height: 25px;
-    font-weight: 400;	    
+    font-weight: 400;
     color: #6c6c6c;
     background-color: #fff;
     overflow-x: hidden;
@@ -407,14 +407,14 @@ body img
     padding-top: 25px;
 }
 
-.carousel-cell h3.entry-title 
-{
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    line-height: 20px;
-    padding: 0;
-    font-weight: 700;    
-}
+    .carousel-cell h3.entry-title {
+       /* font-family: 'Roboto', sans-serif;*/
+        font-family: 'Roboto Mono', monospace;
+        font-size: 15px;
+        line-height: 20px;
+        padding: 0;
+        font-weight: 700;
+    }
 
 .carousel-cell .cat-links 
 {
@@ -1045,19 +1045,19 @@ a.read-more:hover:after
     margin: 0 auto;
 }
 
-.contact-form input[type=text], .contact-form input[type=email], .contact-form textarea
-{
-    border: 0;
-    border-bottom: 2px solid;
-    padding-top: 13px;
-    padding-bottom: 13px;
-    margin: 20px 0;
-    height: 28px;
-    font-size: 15px;
-    font-family: 'Roboto', sans-serif;
-    width: 100%;
-    line-height: 25px;
-}
+    .contact-form input[type=text], .contact-form input[type=email], .contact-form textarea {
+        border: 0;
+        border-bottom: 2px solid;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        margin: 20px 0;
+        height: 28px;
+        font-size: 15px;
+       /* font-family: 'Roboto', sans-serif;*/
+        font-family: 'Roboto Mono', monospace;
+        width: 100%;
+        line-height: 25px;
+    }
 
 .contact-form input[name="your-name"]
 {
@@ -1070,62 +1070,62 @@ a.read-more:hover:after
     height: 150px;
 }
 
-.contact-form input[type=submit]
-{	
-    display: inline-block;
-    border: 2px solid;
-    text-align: center;
-    padding: 20px 0px;
-    cursor: pointer;
-    margin-bottom: 25px;
-    vertical-align: middle;
-    text-decoration: none;
-    background: transparent;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    width: 100%;
-    font-size: 15px;
-    transition: color .2s ease, background-color .2s ease, border-color .2s ease;
-}
+    .contact-form input[type=submit] {
+        display: inline-block;
+        border: 2px solid;
+        text-align: center;
+        padding: 20px 0px;
+        cursor: pointer;
+        margin-bottom: 25px;
+        vertical-align: middle;
+        text-decoration: none;
+        background: transparent;
+       /* font-family: 'Roboto', sans-serif;*/
+        font-family: 'Roboto Mono', monospace;
+        font-weight: 700;
+        width: 100%;
+        font-size: 15px;
+        transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+    }
 .contact-form input[type=submit]:hover
 {
     color: #0697ae;
 }
 
-.contact-form input[type=text]::-webkit-input-placeholder, .contact-form input[type=email]::-webkit-input-placeholder, .contact-form textarea::-webkit-input-placeholder
-{
-    font-family: 'Roboto', sans-serif;
-    color: #404040;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 25px;    
-}
-.contact-form input[type=text]::-moz-placeholder, .contact-form input[type=email]::-moz-placeholder, .contact-form textarea::-moz-placeholder
-{
-    font-family: 'Roboto', sans-serif;
-    color: #404040;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 25px;
-    opacity: 1;    
-}
-.contact-form input[type=text]:-ms-input-placeholder, .contact-form input[type=email]:-ms-input-placeholder, .contact-form textarea:-ms-input-placeholder
-{
-    font-family: 'Roboto', sans-serif;
-    color: #404040;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 25px;    
-}
-.contact-form input[type=text]:-moz-placeholder, .contact-form input[type=email]:-moz-placeholder, .contact-form textarea:-moz-placeholder
-{
-    font-family: 'Roboto', sans-serif;
-    color: #404040;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 25px;
-    opacity: 1;    
-}
+    .contact-form input[type=text]::-webkit-input-placeholder, .contact-form input[type=email]::-webkit-input-placeholder, .contact-form textarea::-webkit-input-placeholder {
+        /*font-family: 'Roboto', sans-serif;*/
+        font-family: 'Roboto Mono', monospace;
+        color: #404040;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 25px;
+    }
+    .contact-form input[type=text]::-moz-placeholder, .contact-form input[type=email]::-moz-placeholder, .contact-form textarea::-moz-placeholder {
+       /* font-family: 'Roboto', sans-serif;*/
+        font-family: 'Roboto Mono', monospace;
+        color: #404040;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 25px;
+        opacity: 1;
+    }
+    .contact-form input[type=text]:-ms-input-placeholder, .contact-form input[type=email]:-ms-input-placeholder, .contact-form textarea:-ms-input-placeholder {
+        /*font-family: 'Roboto', sans-serif;*/
+        font-family: 'Roboto Mono', monospace;
+        color: #404040;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 25px;
+    }
+    .contact-form input[type=text]:-moz-placeholder, .contact-form input[type=email]:-moz-placeholder, .contact-form textarea:-moz-placeholder {
+        /*font-family: 'Roboto', sans-serif;*/
+        font-family: 'Roboto Mono', monospace;
+        color: #404040;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 25px;
+        opacity: 1;
+    }
 
 /* ===================================
     10. Footer CSS
