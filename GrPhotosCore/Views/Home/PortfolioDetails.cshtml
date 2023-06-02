@@ -1,0 +1,128 @@
+﻿@{
+    ViewData["Title"] = "PortfolioDetails";
+}
+
+
+<div class="content-right-holder">
+    <div class="header-page-content">
+        <img id="my_image" src="~/images/bw/img_01.jpg" alt="" data-action="zoom"/>
+    </div>
+    <div class="post-info">
+        <div class="single-nav">
+            <div class="nav-previous">
+                <a id="prev" href="">
+                    <img src="~/images/arrow_left@2x.png" alt="Previous">
+                </a>
+            </div>
+            <div class="nav-next">
+                <a id="next" href="">
+                    <img src="~/images/arrow_right@2x.png" alt="Next">
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="item-info">
+            <ul>
+                <li class="item-info-title">Project Name</li>
+                <li class="item-info-text">Poster</li>
+            </ul>
+            <ul>
+                <li class="item-info-title">Client</li>
+                <li class="item-info-text">Donec Est</li>
+            </ul>
+            <ul>
+                <li class="item-info-title">Year</li>
+                <li class="item-info-text">2017</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="entry-holder">
+        <h1 class="entry-title">
+            Printed Poster Art Minimal
+        </h1>
+        <div class="entry-content">
+            <p>
+                He an thing rapid these after going drawn or. Timed she his law the spoil round defer. In surprise concerns informed betrayed he learning is former.
+            </p>
+            <br>
+            <p>
+                So yetty aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
+            </p>
+        </div>
+    </div>
+
+    <div class="single-nav mob">
+        <div class="nav-previous">
+            <a href="#">
+                <img src="~/images/arrow_left@2x.png" alt="Previous">
+            </a>
+        </div>
+        <div class="nav-next">
+            <a href="#">
+                <img src="~/images/arrow_right@2x.png" alt="Next">
+            </a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+@section scripts {
+    <script>
+        var zs;
+        var m;
+        $(function () {
+
+
+
+            var hash = window.location.hash;
+            var imgIndex = hash.replace("#", "").split("p")[1];
+
+            var page = parseInt(imgIndex);
+            var p = "";
+            if ((page - 1) > 0 && (page - 1) < 10) {
+                p = "#p0" + (page - 1);
+            }
+            else {
+                p = "#p" + (page - 1);
+            }
+            if ((page - 1) == 0) p = "#p01";
+            if (page == 15) p = "#p14";
+
+            var n = page >= 1 && page < 9 ? "#p0" + (page + 1) : page < 15 ? "#p" + (page + 1) : "#p15";
+
+            $("#my_image").attr("src", "/images/bw/img_" + imgIndex + ".jpg");
+
+            $("#prev").on("click", function (ev) {
+                ev.preventDefault();
+                window.location.href = "@Url.Action("PortfolioDetails", "home")" + p;
+                location.reload();
+            });
+            $("#next").on("click", function (ev) {
+                ev.preventDefault();
+                window.location.href = "@Url.Action("PortfolioDetails", "home")" + n;
+                location.reload();
+            });
+            zs = this.ZoomService;
+            var mimg = $("#my_image").on("click", function (ev) {
+
+
+                zs._zoom(ev);
+
+
+                this.$(body)
+                    .removeClass('zoom-overlay-open')
+                    .addClass('zoom-overlay-transitioning')
+
+
+                console.log(ev);
+            });
+            //  zs = this.ZoomService;
+            // zs._zoom(this.ev);
+
+            $("#my_image").trigger("click");
+        })
+    </script>
+}
