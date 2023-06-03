@@ -1,7 +1,12 @@
+using GrPhotosCore.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register interface and classes
+builder.Services.AddScoped<INopFileProvider, NopFileProvider>();
 
 var app = builder.Build();
 

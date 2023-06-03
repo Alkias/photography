@@ -1,4 +1,4 @@
-﻿
+﻿@model List<GrPhotosCore.Domain.Exif>
 @{
     ViewData["Title"] = "Portfolio";
 }
@@ -16,7 +16,22 @@
     </div>
     <div class="grid" id="portfolio">
         <div class="grid-sizer"></div>
-        <div class="grid-item element-item p_one_third interior">
+        
+        @foreach (var product in Model) {
+            <div class="grid-item element-item p_one_third interior">
+                <a href="@Url.Action("PortfolioDetails","home",new{id=product.Id})">
+                    <img src="~/images/bw/img_@(product.Id).jpg" alt="" />
+
+                    <div class="portfolio-text-holder">
+                        <p class="portfolio-text">Smartphone</p>
+                        <p class="portfolio-cat">Interior</p>
+                    </div>
+                </a>
+            </div>
+        }
+        
+        
+        @*<div class="grid-item element-item p_one_third interior">
             <a href="@Url.Action("PortfolioDetails","home")#p01">
                 <img src="~/images/bw/img_01.jpg" alt="" />
 
@@ -161,7 +176,8 @@
                     <p class="portfolio-cat">Interior</p>
                 </div>
             </a>
-        </div>
+        </div>*@
+
     </div>
 </div>
 <div class="clear"></div>

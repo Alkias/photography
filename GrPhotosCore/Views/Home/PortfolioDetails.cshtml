@@ -1,21 +1,31 @@
-﻿@{
+﻿@model GrPhotosCore.Domain.Exif
+@{
     ViewData["Title"] = "PortfolioDetails";
+    var img = $"/images/bw/img_{Model.Id}.jpg";
+
+    var prev = Model.Id > 1 ? Model.Id - 1 : 1;
+    var next = Model.Id < 15 ? Model.Id + 1 : 15;
 }
 
-
+<style>
+    .single-portfolio .item-info-text {
+        font-size: .8rem;
+        padding-bottom: 4px;
+    }
+</style>
 <div class="content-right-holder">
     <div class="header-page-content">
-        <img id="my_image" src="~/images/bw/img_01.jpg" alt="" data-action="zoom"/>
+        <img id="my_image" src="@img" alt="" data-action="zoom" />
     </div>
     <div class="post-info">
         <div class="single-nav">
             <div class="nav-previous">
-                <a id="prev" href="">
+                <a id="prev" href="@Url.Action("PortfolioDetails", "home", new{id=prev})">
                     <img src="~/images/arrow_left@2x.png" alt="Previous">
                 </a>
             </div>
             <div class="nav-next">
-                <a id="next" href="">
+                <a id="next" href="@Url.Action("PortfolioDetails", "home", new{id=next})">
                     <img src="~/images/arrow_right@2x.png" alt="Next">
                 </a>
             </div>
@@ -24,43 +34,73 @@
 
         <div class="item-info">
             <ul>
-                <li class="item-info-title">Project Name</li>
-                <li class="item-info-text">Poster</li>
+                <li class="item-info-title">@Html.NameFor(m => m.CameraModelName)</li>
+                <li class="item-info-text">@Model.CameraModelName</li>
             </ul>
             <ul>
-                <li class="item-info-title">Client</li>
-                <li class="item-info-text">Donec Est</li>
+                <li class="item-info-title">@Html.NameFor(m => m.ExposureTime)</li>
+                <li class="item-info-text">@Model.ExposureTime</li>
             </ul>
             <ul>
-                <li class="item-info-title">Year</li>
-                <li class="item-info-text">2017</li>
+                <li class="item-info-title">@Html.NameFor(m => m.CreateDate)</li>
+                <li class="item-info-text">@Model.CreateDate.ToString("dd/MM/yyyy")</li>
             </ul>
+            <ul>
+                <li class="item-info-title">@Html.NameFor(m => m.ISO)</li>
+                <li class="item-info-text">ISO: @Model.ISO</li>
+            </ul>
+            <ul>
+                <li class="item-info-title">@Html.NameFor(m => m.Aperture)</li>
+                <li class="item-info-text">F-@Model.Aperture</li>
+            </ul>
+            <ul>
+                <li class="item-info-title">@Html.NameFor(m => m.FocalLength)</li>
+                <li class="item-info-text">@Model.FocalLength</li>
+            </ul>
+            
+            @if (!string.IsNullOrWhiteSpace(Model.FilmMode))
+            {
+                <ul>
+                    <li class="item-info-title">@Html.NameFor(m => m.FilmMode)</li>
+                    <li class="item-info-text">@Model.FilmMode</li>
+                </ul>
+            }
+            
+            @if(!string.IsNullOrWhiteSpace(Model.LensMake)) {
+                <ul>
+                    <li class="item-info-title">@Html.NameFor(m => m.LensMake)</li>
+                    <li class="item-info-text">@Model.LensMake</li>
+                </ul>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Model.LensModel))
+            {
+                <ul>
+                    <li class="item-info-title">@Html.NameFor(m => m.LensModel)</li>
+                    <li class="item-info-text">@Model.LensModel</li>
+                </ul>
+            }
+           
         </div>
     </div>
 
     <div class="entry-holder">
         <h1 class="entry-title">
-            Printed Poster Art Minimal
+            @Model.Title
         </h1>
         <div class="entry-content">
-            <p>
-                He an thing rapid these after going drawn or. Timed she his law the spoil round defer. In surprise concerns informed betrayed he learning is former.
-            </p>
-            <br>
-            <p>
-                So yetty aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
-            </p>
+            @Model.Description
         </div>
     </div>
 
     <div class="single-nav mob">
         <div class="nav-previous">
-            <a href="#">
+            <a href="@Url.Action("PortfolioDetails", "home", new{id=prev})">
                 <img src="~/images/arrow_left@2x.png" alt="Previous">
             </a>
         </div>
         <div class="nav-next">
-            <a href="#">
+            <a href="@Url.Action("PortfolioDetails", "home", new{id=next})">
                 <img src="~/images/arrow_right@2x.png" alt="Next">
             </a>
         </div>
@@ -71,58 +111,17 @@
 
 @section scripts {
     <script>
-        var zs;
-        var m;
-        $(function () {
-
-
-
-            var hash = window.location.hash;
-            var imgIndex = hash.replace("#", "").split("p")[1];
-
-            var page = parseInt(imgIndex);
-            var p = "";
-            if ((page - 1) > 0 && (page - 1) < 10) {
-                p = "#p0" + (page - 1);
-            }
-            else {
-                p = "#p" + (page - 1);
-            }
-            if ((page - 1) == 0) p = "#p01";
-            if (page == 15) p = "#p14";
-
-            var n = page >= 1 && page < 9 ? "#p0" + (page + 1) : page < 15 ? "#p" + (page + 1) : "#p15";
-
-            $("#my_image").attr("src", "/images/bw/img_" + imgIndex + ".jpg");
-
-            $("#prev").on("click", function (ev) {
-                ev.preventDefault();
-                window.location.href = "@Url.Action("PortfolioDetails", "home")" + p;
-                location.reload();
-            });
-            $("#next").on("click", function (ev) {
-                ev.preventDefault();
-                window.location.href = "@Url.Action("PortfolioDetails", "home")" + n;
-                location.reload();
-            });
-            zs = this.ZoomService;
+        $(function(){
+            var zs = this.ZoomService;
             var mimg = $("#my_image").on("click", function (ev) {
-
-
                 zs._zoom(ev);
-
-
                 this.$(body)
                     .removeClass('zoom-overlay-open')
-                    .addClass('zoom-overlay-transitioning')
-
+                    .addClass('zoom-overlay-transitioning');
 
                 console.log(ev);
             });
-            //  zs = this.ZoomService;
-            // zs._zoom(this.ev);
-
             $("#my_image").trigger("click");
-        })
+        });
     </script>
 }
