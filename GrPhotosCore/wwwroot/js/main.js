@@ -22,7 +22,13 @@
 
         $('.filters-button-group').on('click', '.button', function () {
             var filterValue = $(this).attr('data-filter');
-            grid.isotope({filter: filterValue});
+
+            var isIsotop = $(this).attr('class') =="button no-isotop";
+
+            if (!isIsotop) {
+                grid.isotope({ filter: filterValue });
+            }
+                
         });
 
         // change is-checked class on buttons
@@ -68,7 +74,7 @@ $(window).on('load', function () {
 
 
     $(".category-filter").on('click', function () {
-        $(".category-filter-list").slideToggle("fast");
+       $(this).next(".category-filter-list").slideToggle("fast");
     });
 
 

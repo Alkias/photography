@@ -8,10 +8,45 @@
 }
 
 <style>
+    .content-right-holder {
+        width: 800px;
+        max-width: 95%;
+    }
+
+    .post-info {
+        float: left;
+        width: 200px;
+        padding-right: 50px;
+    }
+
+    .single .entry-holder {
+        float: right;
+        width: calc(100% - 250px);
+    }
+
+    
+
     .single-portfolio .item-info-text {
         font-size: .8rem;
         padding-bottom: 4px;
     }
+
+    .item-info-title {
+        color: #000;
+        font-weight: 700;
+        margin-bottom: 0;
+        line-height:1em;
+    }
+
+    h2.entry-subtitle {
+        font-size: 0.9rem;
+        line-height: 1em;
+        padding-top: 0;
+        margin-top: -1rem;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+
 </style>
 <div class="content-right-holder">
     <div class="header-page-content">
@@ -34,60 +69,57 @@
 
         <div class="item-info">
             <ul>
-                <li class="item-info-title">@Html.NameFor(m => m.CameraModelName)</li>
-                <li class="item-info-text">@Model.CameraModelName</li>
-            </ul>
-            <ul>
-                <li class="item-info-title">@Html.NameFor(m => m.ExposureTime)</li>
-                <li class="item-info-text">@Model.ExposureTime</li>
-            </ul>
-            <ul>
-                <li class="item-info-title">@Html.NameFor(m => m.CreateDate)</li>
+                <li class="item-info-title">@Html.DisplayNameFor(m => m.CreateDate)</li>
                 <li class="item-info-text">@Model.CreateDate.ToString("dd/MM/yyyy")</li>
             </ul>
             <ul>
-                <li class="item-info-title">@Html.NameFor(m => m.ISO)</li>
-                <li class="item-info-text">ISO: @Model.ISO</li>
+                <li class="item-info-title">@Html.DisplayNameFor(m => m.CameraModelName)</li>
+                <li class="item-info-text">@Model.CameraModelName</li>
             </ul>
             <ul>
-                <li class="item-info-title">@Html.NameFor(m => m.Aperture)</li>
+                <li class="item-info-title">@Html.DisplayNameFor(m => m.Aperture)</li>
                 <li class="item-info-text">F-@Model.Aperture</li>
             </ul>
             <ul>
-                <li class="item-info-title">@Html.NameFor(m => m.FocalLength)</li>
+                <li class="item-info-title">@Html.DisplayNameFor(m => m.ExposureTime)</li>
+                <li class="item-info-text">@Model.ExposureTime</li>
+            </ul>
+            <ul>
+                <li class="item-info-title">@Html.DisplayNameFor(m => m.ISO)</li>
+                <li class="item-info-text">ISO: @Model.ISO</li>
+            </ul>
+            <ul>
+                <li class="item-info-title">@Html.DisplayNameFor(m => m.FocalLength)</li>
                 <li class="item-info-text">@Model.FocalLength</li>
             </ul>
-            
-            @if (!string.IsNullOrWhiteSpace(Model.FilmMode))
-            {
+
+            @if (!string.IsNullOrWhiteSpace(Model.FilmMode)) {
                 <ul>
-                    <li class="item-info-title">@Html.NameFor(m => m.FilmMode)</li>
+                    <li class="item-info-title">@Html.DisplayNameFor(m => m.FilmMode)</li>
                     <li class="item-info-text">@Model.FilmMode</li>
                 </ul>
             }
-            
-            @if(!string.IsNullOrWhiteSpace(Model.LensMake)) {
+
+            @* @if(!string.IsNullOrWhiteSpace(Model.LensMake)) {
                 <ul>
-                    <li class="item-info-title">@Html.NameFor(m => m.LensMake)</li>
+                    <li class="item-info-title">@Html.DisplayNameFor(m => m.LensMake)</li>
                     <li class="item-info-text">@Model.LensMake</li>
                 </ul>
-            }
+            }*@
 
-            @if (!string.IsNullOrWhiteSpace(Model.LensModel))
-            {
+            @if (!string.IsNullOrWhiteSpace(Model.LensModel)) {
                 <ul>
-                    <li class="item-info-title">@Html.NameFor(m => m.LensModel)</li>
+                    <li class="item-info-title">@Html.DisplayNameFor(m => m.LensModel)</li>
                     <li class="item-info-text">@Model.LensModel</li>
                 </ul>
             }
-           
+
         </div>
     </div>
 
     <div class="entry-holder">
-        <h1 class="entry-title">
-            @Model.Title
-        </h1>
+        <h1 class="entry-title">@Model.Title</h1>
+        <h2 class="entry-subtitle">@Model.Location</h2>
         <div class="entry-content">
             @Model.Description
         </div>
