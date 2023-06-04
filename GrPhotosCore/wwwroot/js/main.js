@@ -43,8 +43,13 @@
         })
 
         $('.gallery-filter').on('click', function () {
-            $(this).next('.gallery-filter-list').slideToggle('fast')
+            //$(this).next('.gallery-filter-list').slideToggle('fast')
+
+            $(this).next('.gallery-filter-list').slideToggle('fast');
+            $(this).next('.gallery-filter-list').delay(5000).slideToggle('fast');
         })
+
+        
 
         //Set menu
         $('.main-menu').smartmenus({

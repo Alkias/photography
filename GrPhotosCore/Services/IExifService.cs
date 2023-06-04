@@ -8,6 +8,13 @@ namespace GrPhotosCore.Services;
 public interface IExifService
 {
      Task<List<string>?> GetGalleriesAsync(string filename);
+
+     /// <summary>
+     /// Return a list of exifs to show in home page
+     /// </summary>
+     /// <param name="filename">Json Filename</param>
+     /// <returns>A list of exifs</returns>
+     Task<List<Exif>?> GetHomeExifs(string filename);
 }
 
 public class ExifService : IExifService
@@ -24,6 +31,18 @@ public class ExifService : IExifService
         var exifs = await GetExifs(filename);
 
         var galleries = exifs?.Select(x=>x.Gallery).Distinct().ToList();
+
+        return galleries;
+    }
+
+    /// <summary>
+    /// Return a list of exifs to show in home page
+    /// </summary>
+    /// <param name="filename">Json Filename</param>
+    /// <returns>A list of exifs</returns>
+    public async Task<List<Exif>?> GetHomeExifs(string filename) {
+        var exifs = await GetExifs(filename);
+        var galleries = exifs?.Where(x => x.ShowToHome).ToList();
 
         return galleries;
     }

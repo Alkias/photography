@@ -25,9 +25,9 @@ namespace GrPhotosCore.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index() {
+        public async Task<IActionResult>  Index() {
             
-            var carousel = SotosExifs();
+            var carousel = await _exifService.GetHomeExifs("exif");
 
             ViewBag.css = "home";
             return View(carousel);
@@ -80,15 +80,7 @@ namespace GrPhotosCore.Controllers
 
         public async Task<IActionResult> Portfolio(string gallery= "Ασπρόμαυρη πόλη") {
 
-            var model = new PortfolioModel();
-
-            var galleries = await _exifService.GetGalleriesAsync("exif");
-            model.Geleries = galleries;
-            model.Categories = new List<string>();
-
-            var exifs = SotosExifs()!.Where(x=>x.Gallery==gallery).ToList();
-            model.Exifs = exifs;
-            model.ActiveGallery = gallery;
+            var model = await PreparePortfolioModel(gallery);
 
             ViewBag.css = "page page-portfolio";
             ViewBag.Message = "Your application description page.";
@@ -96,10 +88,12 @@ namespace GrPhotosCore.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> GetGallery(string gallery = "Ασπρόμαυρη πόλη")
-        {
-
+        /// <summary>
+        /// Returns a Portfolio model filtered by Gallery
+        /// </summary>
+        /// <param name="gallery">Gallery Keyword</param>
+        /// <returns></returns>
+        private async Task<PortfolioModel> PreparePortfolioModel(string gallery) {
             var model = new PortfolioModel();
 
             var galleries = await _exifService.GetGalleriesAsync("exif");
@@ -109,6 +103,13 @@ namespace GrPhotosCore.Controllers
             var exifs = SotosExifs()!.Where(x => x.Gallery == gallery).ToList();
             model.Exifs = exifs;
             model.ActiveGallery = gallery;
+            return model;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetGallery(string gallery = "Ασπρόμαυρη πόλη") {
+
+            var model = await PreparePortfolioModel(gallery);
 
             ViewBag.css = "page page-portfolio";
             ViewBag.Message = "Your application description page.";
