@@ -9,22 +9,22 @@ namespace GrPhotosCore.Domain
         public int Id { get; set; }
 
 
-        public string? Location { get; set; }
+        public string Location { get; set; }
 
-        public string? Gallery { get; set; }
+        public string Gallery { get; set; }
 
-        public string? Category { get; set; }
+        public string Category { get; set; }
 
         public bool ShowToHome { get; set; }
 
-        public string? Title { get; set; }
-        public string? Description { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
 
         [Display(Name = "Camera")]
-        public string? CameraModelName { get; set; }
+        public string CameraModelName { get; set; }
 
         [Display(Name = "Ταχύτητα")]
-        public string? ExposureTime { get; set; }
+        public string ExposureTime { get; set; }
        
         public int ISO { get; set; }
 
@@ -35,14 +35,14 @@ namespace GrPhotosCore.Domain
         public double Aperture { get; set; }
 
         [Display(Name = "Εστιακή απόσταση")]
-        public string? FocalLength { get; set; }
+        public string FocalLength { get; set; }
 
         [Display(Name = "Τύπος φίλμ")]
-        public string? FilmMode { get; set; }
+        public string FilmMode { get; set; }
         
-        public string? LensMake { get; set; }
+        public string LensMake { get; set; }
 
         [Display(Name = "Φακός")]
-        public string? LensModel { get; set; }
+        public string LensModel { get; set; }
     }
 }

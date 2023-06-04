@@ -1,4 +1,4 @@
-﻿@model List<GrPhotosCore.Domain.Exif>
+﻿@model PortfolioModel
 @{
     ViewData["Title"] = "Portfolio";
 }
@@ -11,23 +11,20 @@
     }
 </style>
 
-@section Pagetitle {
-    <div class="content-left">
-        <div class="category-filter" style="right:140px;">
-            <div class="galleries">Συλλογές</div>
-        </div>
 
-        <div class="category-filter-list button-group filters-button-group" style="display: block !important;">
-            <div class="button no-isotop is-checked" data-filter="*">All</div>
-            <div class="button no-isotop" data-filter=".interior">Interior</div>
-            <div class="button no-isotop" data-filter=".abstract">Abstract</div>
-            <div class="button no-isotop" data-filter=".industry">Industry</div>
-        </div>
-    </div>
-   
-}
 
 <div class="portfolio-wrapper">
+    
+    <div class="gallery-filter" style="right:180px;">
+        <div class="galleries">Συλλογές</div>
+    </div>
+    <div class="gallery-filter-list button-group gallery-button-group" style="display: block !important;width: 150px;">
+        @foreach (var gal in Model.Geleries) {
+            var isChecked = Model.ActiveGallery == gal ? " is-checked" : "";
+            <div class="button no-isotop@(isChecked)" data-filter="@(gal)">@(gal)</div>
+        }
+    </div>
+
     <div class="category-filter">
         <div class="category-filter-icon"></div>
     </div>
@@ -41,15 +38,15 @@
 
     <div class="grid" id="portfolio">
         <div class="grid-sizer"></div>
-        
-        @foreach (var product in Model) {
+
+        @foreach (var exif in Model.Exifs) {
             <div class="grid-item element-item p_one_third interior">
-                <a href="@Url.Action("PortfolioDetails","home",new{id=product.Id})">
-                    <img src="~/images/bw/img_@(product.Id).jpg" alt="" />
+                <a href="@Url.Action("PortfolioDetails", "home", new { id = exif.Id })">
+                    <img src="~/images/bw/img_@(exif.Id).jpg" alt=""/>
 
                     <div class="portfolio-text-holder">
-                        <p class="portfolio-text">@product.Location</p>
-                        <p class="portfolio-cat">@product.Category</p>
+                        <p class="portfolio-text">@exif.Title</p>
+                        <p class="portfolio-cat">@exif.Location</p>
                     </div>
                 </a>
             </div>
@@ -59,3 +56,44 @@
 </div>
 <div class="clear"></div>
 
+@section Scripts {
+    <script>
+    
+    $(function(){
+        
+            //alert("kati");
+
+            $('.gallery-button-group').on('click', '.button', function () {
+                //alert("kati-allo");
+                var filterValue = $(this).attr('data-filter');
+                $.ajax({
+                    url: '@Url.Action("GetGallery", "Home")',
+                    type: 'POST',
+                    data: { gallery: filterValue },
+                    success: function (result) {
+                        
+                        $("#portfolio").replaceWith(result);                        
+
+                        var grid = $('.grid').imagesLoaded(function () {
+                            grid.isotope({
+                                percentPosition: true,
+                                itemSelector: '.grid-item',
+                                masonry: {
+                                    columnWidth: '.grid-sizer'
+                                }
+                            })
+                        });
+                        
+                    },
+                    error: function (xhr, exception) {
+                        console.log("error");
+                        return false;
+                    }
+                });
+            });
+    });    
+
+    
+    
+    </script>
+}

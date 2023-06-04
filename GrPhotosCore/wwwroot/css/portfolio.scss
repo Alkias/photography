@@ -1,0 +1,68 @@
+$color_1: #fff;
+$color_2: #8bd2ff;
+$color_3: #000;
+$background-color_1: #000;
+$background-color_2: white;
+
+.gallery-filter {
+	position: absolute;
+	left: 15px;
+	top: -20px;
+	z-index: 5;
+	width: 25px;
+	height: 15px;
+	cursor: pointer;
+	&:hover {
+		.gallery-filter-icon {
+			width: 24px;
+			&:after {
+				transform: translate(4px,8px);
+			}
+			&:before {
+				transform: translate(14px,11px);
+			}
+		}
+	}
+}
+.gallery-filter-icon {
+	width: 20px;
+	height: 3px;
+	background-color: $background-color_1;
+	float: right;
+	transition: width .3s ease;
+	&:after {
+		content: "";
+		display: block;
+		width: 10px;
+		height: 3px;
+		background-color: $background-color_1;
+		transform: translate(-5px,8px);
+		transition: transform .3s ease;
+	}
+	&:before {
+		content: "";
+		display: block;
+		width: 10px;
+		height: 3px;
+		background-color: $background-color_1;
+		transform: translate(10px,11px);
+		transition: transform .3s ease;
+	}
+}
+.gallery-filter-list {
+	background-color: $background-color_1;
+	padding: 24px 20px;
+	width: 110px;
+	display: none;
+	position: absolute;
+	left: 15px;
+	top: 15px;
+	font-size: 13px;
+	line-height: 22px;
+	color: $color_1;
+	z-index: 99;
+	cursor: pointer;
+	.button.is-checked {
+		color: $color_2;
+	}
+}

@@ -1,4 +1,5 @@
 using GrPhotosCore.Infrastructure;
+using GrPhotosCore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 // Register interface and classes
 builder.Services.AddScoped<INopFileProvider, NopFileProvider>();
+builder.Services.AddScoped<IExifService, ExifService>();
 
 var app = builder.Build();
 

@@ -1,4 +1,3 @@
-
 ;
 (function ($) {
     'use stict'
@@ -10,6 +9,38 @@
     })
 
     $('.site-content').fitVids()
+
+    //Portfolio
+    var grid = $('.grid').imagesLoaded(function () {
+        grid.isotope({
+            percentPosition: true,
+            itemSelector: '.grid-item',
+            masonry: {
+                columnWidth: '.grid-sizer'
+            }
+        })
+
+        $('.filters-button-group').on('click', '.button', function () {
+            var filterValue = $(this).attr('data-filter')
+
+            var isIsotop = $(this).attr('class') == 'button no-isotop'
+
+            if (!isIsotop) {
+                grid.isotope({
+                    filter: filterValue
+                })
+            }
+        })
+
+        // change is-checked class on buttons
+        $('.button-group').each(function (i, buttonGroup) {
+            var $buttonGroup = $(buttonGroup)
+            $buttonGroup.on('click', '.button', function () {
+                $buttonGroup.find('.is-checked').removeClass('is-checked')
+                $(this).addClass('is-checked')
+            })
+        })
+    })
 
     //Placeholder show/hide
     $('input, textarea').on('focus', function () {
@@ -40,10 +71,6 @@
 
         $('.category-filter').on('click', function () {
             $(this).next('.category-filter-list').slideToggle('fast')
-        })
-
-        $('.gallery-filter').on('click', function () {
-            $(this).next('.gallery-filter-list').slideToggle('fast')
         })
 
         //Set menu
@@ -174,35 +201,3 @@
         }
     }
 })(jQuery)
-
- //Portfolio
- var grid = $('.grid').imagesLoaded(function () {
-    grid.isotope({
-        percentPosition: true,
-        itemSelector: '.grid-item',
-        masonry: {
-            columnWidth: '.grid-sizer'
-        }
-    })
-
-    $('.filters-button-group').on('click', '.button', function () {
-        var filterValue = $(this).attr('data-filter')
-
-        var isIsotop = $(this).attr('class') == 'button no-isotop'
-
-        if (!isIsotop) {
-            grid.isotope({
-                filter: filterValue
-            })
-        }
-    })
-
-    // change is-checked class on buttons
-    $('.button-group').each(function (i, buttonGroup) {
-        var $buttonGroup = $(buttonGroup)
-        $buttonGroup.on('click', '.button', function () {
-            $buttonGroup.find('.is-checked').removeClass('is-checked')
-            $(this).addClass('is-checked')
-        })
-    })
-})

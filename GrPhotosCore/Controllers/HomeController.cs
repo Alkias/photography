@@ -5,19 +5,23 @@ using GrPhotosCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Newtonsoft.Json;
+using GrPhotosCore.Services;
 
 namespace GrPhotosCore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly INopFileProvider _fileProvider;
+        private readonly IExifService _exifService;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(
             INopFileProvider fileProvider,
+            IExifService exifService,
             ILogger<HomeController> logger
         ) {
             _fileProvider = fileProvider;
+            _exifService = exifService;
             _logger = logger;
         }
 
@@ -74,25 +78,58 @@ namespace GrPhotosCore.Controllers
             return View();
         }
 
-        public IActionResult Portfolio() {
+        public async Task<IActionResult> Portfolio(string gallery= "Ασπρόμαυρη πόλη") {
 
-            var photos = SotosExifs();
+            var model = new PortfolioModel();
+
+            var galleries = await _exifService.GetGalleriesAsync("exif");
+            model.Geleries = galleries;
+            model.Categories = new List<string>();
+
+            var exifs = SotosExifs()!.Where(x=>x.Gallery==gallery).ToList();
+            model.Exifs = exifs;
+            model.ActiveGallery = gallery;
 
             ViewBag.css = "page page-portfolio";
             ViewBag.Message = "Your application description page.";
 
-            return View(photos);
+            return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetGallery(string gallery = "Ασπρόμαυρη πόλη")
+        {
+
+            var model = new PortfolioModel();
+
+            var galleries = await _exifService.GetGalleriesAsync("exif");
+            model.Geleries = galleries;
+            model.Categories = new List<string>();
+
+            var exifs = SotosExifs()!.Where(x => x.Gallery == gallery).ToList();
+            model.Exifs = exifs;
+            model.ActiveGallery = gallery;
+
+            ViewBag.css = "page page-portfolio";
+            ViewBag.Message = "Your application description page.";
+
+            return PartialView("_Gallery",model);
+        }
+
 
         public IActionResult PortfolioDetails(int id) {
 
-            var photos = SotosExifs();
-            var img = photos.FirstOrDefault(m => m.Id == id);
+            var exifs = SotosExifs();
+            if (exifs != null) {
+                var exif = exifs.FirstOrDefault(m => m.Id == id);
 
-            ViewBag.css = "single single-portfolio";
-            ViewBag.Message = "Your application description page.";
+                ViewBag.css = "single single-portfolio";
+                ViewBag.Message = "Your application description page.";
 
-            return View(img);
+                return View(exif);
+            }
+
+            return View(null);
         }
 
         public IActionResult Contact() {

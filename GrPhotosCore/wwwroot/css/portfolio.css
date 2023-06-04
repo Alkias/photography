@@ -1,0 +1,80 @@
+.gallery-filter {
+  position: absolute;
+  left: 15px;
+  top: -20px;
+  z-index: 5;
+  width: 25px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.gallery-filter:hover .gallery-filter-icon {
+  width: 24px;
+}
+
+.gallery-filter:hover .gallery-filter-icon:after {
+  -webkit-transform: translate(4px, 8px);
+          transform: translate(4px, 8px);
+}
+
+.gallery-filter:hover .gallery-filter-icon:before {
+  -webkit-transform: translate(14px, 11px);
+          transform: translate(14px, 11px);
+}
+
+.gallery-filter-icon {
+  width: 20px;
+  height: 3px;
+  background-color: #000;
+  float: right;
+  -webkit-transition: width .3s ease;
+  transition: width .3s ease;
+}
+
+.gallery-filter-icon:after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 3px;
+  background-color: #000;
+  -webkit-transform: translate(-5px, 8px);
+          transform: translate(-5px, 8px);
+  -webkit-transition: -webkit-transform .3s ease;
+  transition: -webkit-transform .3s ease;
+  transition: transform .3s ease;
+  transition: transform .3s ease, -webkit-transform .3s ease;
+}
+
+.gallery-filter-icon:before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 3px;
+  background-color: #000;
+  -webkit-transform: translate(10px, 11px);
+          transform: translate(10px, 11px);
+  -webkit-transition: -webkit-transform .3s ease;
+  transition: -webkit-transform .3s ease;
+  transition: transform .3s ease;
+  transition: transform .3s ease, -webkit-transform .3s ease;
+}
+
+.gallery-filter-list {
+  background-color: #000;
+  padding: 24px 20px;
+  width: 110px;
+  display: none;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-size: 13px;
+  line-height: 22px;
+  color: #fff;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.gallery-filter-list .button.is-checked {
+  color: #8bd2ff;
+}
+/*# sourceMappingURL=portfolio.css.map */

@@ -1,0 +1,22 @@
+﻿@model PortfolioModel
+@{
+    Layout = null;
+}
+
+<div class="grid" id="portfolio">
+    <div class="grid-sizer"></div>
+        
+    @foreach (var exif in Model.Exifs) {
+        <div class="grid-item element-item p_one_third interior">
+            <a href="@Url.Action("PortfolioDetails","home",new{id=exif.Id})">
+                <img src="~/images/bw/img_@(exif.Id).jpg" alt="" />
+
+                <div class="portfolio-text-holder">
+                    <p class="portfolio-text">@exif.Title</p>
+                    <p class="portfolio-cat">@exif.Location</p>
+                </div>
+            </a>
+        </div>
+    }
+
+</div>
